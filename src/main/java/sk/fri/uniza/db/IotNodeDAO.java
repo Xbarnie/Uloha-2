@@ -3,6 +3,7 @@ package sk.fri.uniza.db;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 import sk.fri.uniza.model.IotNode;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -22,21 +23,23 @@ public class IotNodeDAO extends AbstractDAO<IotNodeDAO> {
     }
 
     public IotNode findById(Long id) {
-        //TODO Doplniť
-        return null;
+        Query query = super.currentSession().getSession().createQuery("from IotNode where id = :pa_id ");
+        query.setParameter("pa_id",id);
+        List<?> list = query.list();
+        return (IotNode) list.get(0);
     }
 
     public IotNode update(IotNode iotNode) {
-        //TODO Doplniť
-        return null;
+        return  (IotNode) currentSession().merge(iotNode);
     }
 
     public List<IotNode> findByHouseHold(Long houseHoldId) {
-        //TODO Doplniť
-        return null;
+        return list(namedQuery("IotNode_findByhouseHoldId")
+                .setParameter("name", houseHoldId));
+
     }
 
     public List<IotNode> allIotNodes() {
-        return null;
+        return list(namedQuery("Node_All"));
     }
 }

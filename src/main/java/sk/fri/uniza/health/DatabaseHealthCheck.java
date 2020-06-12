@@ -9,6 +9,7 @@ import sk.fri.uniza.db.IotNodeDAO;
 import sk.fri.uniza.model.*;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class DatabaseHealthCheck extends HealthCheck {
 
@@ -27,6 +28,22 @@ public class DatabaseHealthCheck extends HealthCheck {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DatabaseHealthCheck that = (DatabaseHealthCheck) o;
+        return Objects.equals(houseHoldDAO, that.houseHoldDAO) &&
+                Objects.equals(fieldDAO, that.fieldDAO) &&
+                Objects.equals(iotNodeDAO, that.iotNodeDAO) &&
+                Objects.equals(dataDAO, that.dataDAO);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(houseHoldDAO, fieldDAO, iotNodeDAO, dataDAO);
+    }
+
+    @Override
     @UnitOfWork
     protected Result check() throws Exception {
         // Testovanie, či už v databáze neexstuje Household
@@ -38,10 +55,9 @@ public class DatabaseHealthCheck extends HealthCheck {
         houseHold.setStreet("Okružná");
         houseHold.setZip("01001");
         houseHold.setContactPerson(
-                new ContactPerson("Ferko", "Mrkvička",
+                new ContactPerson("Ferko", "Mrkvicka",
                         "0907888777", "f.mrkvicka@fri.uniza.sk"));
         houseHold = houseHoldDAO.create(houseHold);
-
         Field airTemp = new Field();
         airTemp.setName("airTemp"); //NativeId - musí sa vytvoriť manuálne
         airTemp.setUnit("°C");

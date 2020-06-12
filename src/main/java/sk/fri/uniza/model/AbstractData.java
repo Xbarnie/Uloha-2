@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 @org.hibernate.annotations.NamedQueries({
         @org.hibernate.annotations.NamedQuery(name = "AbstractData_findData",
                 query = "from AbstractData where household_id = :hhId AND " +
@@ -19,10 +20,8 @@ import java.time.LocalDateTime;
                         "field_id = :fieldId AND dateTime BETWEEN :from" +
                         " AND :to ORDER BY dateTime ASC"),
 })
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -97,6 +96,7 @@ public abstract class AbstractData<T extends Object> {
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 

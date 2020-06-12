@@ -101,6 +101,7 @@ public class HouseHoldResource {
     @UnitOfWork //Otvorí novú hibernate session
     @ApiOperation(value = "Zoznam všetkých domácnosti")
     public List<HouseHold> listHouseHold() {
+
         return houseHoldDAO.findAll();
     }
 
@@ -128,9 +129,8 @@ public class HouseHoldResource {
                 return houseHoldDAO.findByFirstName(value);
             case lastName:
                 return houseHoldDAO.findByLastName(value);
-        }
 
+        }
         return null;
     }
-
 }

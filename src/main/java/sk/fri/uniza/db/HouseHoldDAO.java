@@ -23,10 +23,12 @@ public class HouseHoldDAO extends AbstractDAO<HouseHold> {
     }
 
     public HouseHold update(HouseHold houseHold) {
+
         return (HouseHold) currentSession().merge(houseHold);
     }
 
     public List<HouseHold> findByZip(String zip) {
+
         return list(namedQuery("HouseHold_findByZip")
                 .setParameter("zipNo", zip));
     }
@@ -37,6 +39,7 @@ public class HouseHoldDAO extends AbstractDAO<HouseHold> {
     }
 
     public List<HouseHold> findByLastName(String lastname) {
+
         return list(namedQuery("HouseHold_findByLastName")
                 .setParameter("name", lastname));
     }
@@ -46,6 +49,7 @@ public class HouseHoldDAO extends AbstractDAO<HouseHold> {
     }
 
     public List<HouseHold> findAll() {
+
         return list(namedQuery("HouseHold_findAll"));
     }
 }
