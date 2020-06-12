@@ -22,15 +22,6 @@ public class IoTNodeResource {
 
     @POST
     @UnitOfWork //Otvorí novú hibernate session
-    @Path("/add")
-    @ApiOperation(value = "Pridá nový typ Node")
-    public IotNode createIotNode(@QueryParam("name") String name) {
-        IotNode iotNode = new IotNode(name);
-        return iotNodeDAO.create(iotNode);
-    }
-
-    @POST
-    @UnitOfWork //Otvorí novú hibernate session
     @ApiOperation(value = "Pridá nový typ Node")
     public IotNode createIotNode(@Valid IotNode iotNode) {
         return iotNodeDAO.create(iotNode);

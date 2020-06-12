@@ -97,6 +97,11 @@ public class DatabaseHealthCheck extends HealthCheck {
         dataDAO.create(dataInteger);
         dataDAO.create(dataString);
 
+        IotNode iotNode = new IotNode();
+        iotNode.setName("Majo");
+        iotNode.setHouseHold(houseHold);
+        iotNode = iotNodeDAO.create(iotNode);
+
         return Result.healthy();
     }
 }
